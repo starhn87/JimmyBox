@@ -2,18 +2,18 @@
   "name": "wetube",
   "version": "1.0.0",
   "description": "The best way to watch videos.",
-  "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "win": "node index.js"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/starhn87/wetube.git"
-  },
+  "repository": "git+https://github.com/starhn87/wetube.git",
   "author": "Jimmy",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/starhn87/wetube/issues"
   },
-  "homepage": "https://github.com/starhn87/wetube#readme"
+  "homepage": "https://github.com/starhn87/wetube#readme",
+  "main": "index.js",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
 }
