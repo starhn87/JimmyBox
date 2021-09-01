@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "The best way to watch videos.",
   "scripts": {
-    "dev": "nodemon -L --exec babel-node index"
+    "dev": "nodemon --exec babel-node src/server.js"
   },
   "repository": "git+https://github.com/starhn87/wetube.git",
   "author": "Jimmy",
