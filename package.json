@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "The best way to watch videos.",
   "scripts": {
-    "dev": "nodemon --exec babel-node src/server.js --delay 2"
+    "dev": "nodemon --exec babel-node src/init.js --delay 2"
   },
   "repository": "git+https://github.com/starhn87/wetube.git",
   "author": "Jimmy",
@@ -15,6 +15,7 @@
   "main": "index.js",
   "dependencies": {
     "express": "^4.17.1",
+    "mongoose": "^6.0.5",
     "morgan": "^1.10.0",
     "pug": "^3.0.2"
   },
