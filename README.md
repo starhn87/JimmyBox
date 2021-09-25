@@ -1,4 +1,4 @@
-# Wetube
+# JimmyBox
 
 ### Video Platform project using NodeJS, Express
 
