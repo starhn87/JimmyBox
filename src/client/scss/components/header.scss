@@ -6,6 +6,12 @@ header {
   .header__logo {
     color: $red;
     font-size: 38px;
+    span {
+      font-size: 26px;
+      color: aliceblue;
+      font-family: Verdana, Geneva, Tahoma, sans-serif;
+      vertical-align: 4px;
+    }
   }
   ul {
     display: flex;

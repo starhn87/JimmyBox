@@ -4,7 +4,6 @@ import mongoose from "mongoose";
 
 export const home = async (req, res) => {
   try {
-    // const videos = await Video.find({}).sort({ createdAt: "desc" });
     const videos = await Video.find({})
       .sort({ createdAt: "desc" })
       .populate("owner");
@@ -18,7 +17,6 @@ export const home = async (req, res) => {
 export const watch = async (req, res) => {
   const { id } = req.params;
   const video = await Video.findById(id).populate("owner");
-  console.log(video);
 
   if (!video) {
     return res.status(404).render("404", { pageTitle: "Video not found." });
@@ -42,6 +40,7 @@ export const getEdit = async (req, res) => {
   }
 
   if (String(video.owner) !== _id) {
+    req.flash("error", "Not Authorized.");
     return res.status(403).redirect("/");
   }
 
@@ -61,6 +60,7 @@ export const postEdit = async (req, res) => {
   }
 
   if (String(video.owner) !== _id) {
+    req.flash("error", "You are not the owner of the video.");
     return res.status(403).redirect("/");
   }
 
@@ -70,6 +70,8 @@ export const postEdit = async (req, res) => {
     hashtags: Video.formatHashtags(hashtags),
   });
 
+  req.flash("success", "Video updated!");
+
   return res.redirect(`/videos/${id}`);
 };
 
@@ -78,8 +80,6 @@ export const getUpload = (req, res) => {
 };
 
 export const postUpload = async (req, res) => {
-  console.log(req.files);
-
   const {
     body: { title, description, hashtags },
     files: { video, thumb },
@@ -102,6 +102,8 @@ export const postUpload = async (req, res) => {
     user.videos.push(newVideo._id);
     user.save();
 
+    req.flash("success", "Video uploaded!");
+
     return res.redirect("/");
   } catch (error) {
     return res.status(400).render("videos/upload", {
@@ -123,10 +125,14 @@ export const deleteVideo = async (req, res) => {
   }
 
   if (String(video.owner) !== _id) {
+    req.flash("error", "You are not the owner of the video.");
     return res.status(403).redirect("/");
   }
 
   await Video.findByIdAndDelete(id);
+
+  req.flash("success", "Video deleted!");
+
   return res.redirect("/");
 };
 
@@ -140,7 +146,6 @@ export const search = async (req, res) => {
         $regex: new RegExp(keyword, "i"),
       },
     }).populate("owner");
-    console.log(videos);
   }
 
   return res.render("videos/search", { pageTitle: "Search", videos });

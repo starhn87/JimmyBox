@@ -9,22 +9,6 @@ form {
   }
 }
 
-input:not(input[type="range"]),
-input[type="submit"] {
-  all: unset;
-  padding: 15px 20px;
-  border-radius: 5px;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  background-color: black;
-  margin-bottom: 5px;
-  font-size: 16px;
-  color: white;
-  width: 90%;
-  &::placeholder {
-    color: rgba(255, 255, 255, 0.7);
-  }
-}
-
 input[type="submit"],
 .social__btn {
   border-radius: 5px;
@@ -41,5 +25,22 @@ input[type="submit"],
   &:disabled {
     opacity: 0.5;
     pointer-events: none;
+  }
+}
+
+input:not(input[type="range"]),
+input[type="submit"] {
+  all: unset;
+  padding: 15px 20px;
+  border-radius: 5px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background-color: black;
+  margin-bottom: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  color: white;
+  width: 90%;
+  &::placeholder {
+    color: rgba(255, 255, 255, 0.7);
   }
 }

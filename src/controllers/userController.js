@@ -33,6 +33,8 @@ export const postJoin = async (req, res) => {
       location,
     });
 
+    req.flash("success", "Welcome to sign up JimmyBox!");
+
     return res.redirect("/login");
   } catch (error) {
     return res.status(400).render("users/join", {
@@ -69,6 +71,7 @@ export const postLogin = async (req, res) => {
   req.session.loggedIn = true;
   req.session.user = user;
 
+  req.flash("info", `Hi! ${user.name}`);
   return res.redirect("/");
 };
 
@@ -130,6 +133,7 @@ export const finishGithubLogin = async (req, res) => {
     );
 
     if (!emailObj) {
+      req.flash("error", "No valid email found.");
       return res.redirect("/login");
     }
 
@@ -149,8 +153,11 @@ export const finishGithubLogin = async (req, res) => {
     req.session.loggedIn = true;
     req.session.user = user;
 
+    req.flash("info", `Hi! ${user.name} (Github)`);
+
     return res.redirect("/");
   } else {
+    req.flash("error", "No Github access token found.");
     return res.redirect("/login");
   }
 };
@@ -202,11 +209,14 @@ export const postEdit = async (req, res) => {
 
   req.session.user = updatedUser;
 
+  req.flash("success", "Profile Updated!");
+
   return res.redirect("/users/edit");
 };
 
 export const getChangePassword = (req, res) => {
   if (req.session.user.socialOnly === true) {
+    req.flash("error", "Can't change password.");
     return res.redirect("/");
   }
 
@@ -242,6 +252,8 @@ export const postChangePassword = async (req, res) => {
   await user.save();
 
   req.session.user.password = newPassword;
+
+  req.flash("success", "Password updated!");
 
   return res.redirect("/users/logout");
 };
