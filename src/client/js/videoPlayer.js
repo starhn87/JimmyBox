@@ -120,6 +120,8 @@ const handleEnded = () => {
   fetch(`/api/videos/${id}/view`, {
     method: "POST",
   });
+
+  playBtnIcon.classList = "fas fa-play";
 };
 
 const formatTime = (seconds) =>
