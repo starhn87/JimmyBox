@@ -124,6 +124,26 @@ const handleEnded = () => {
   playBtnIcon.classList = "fas fa-play";
 };
 
+const handleClick = () => {
+  if (video.paused) {
+    playBtnIcon.classList = "fas fa-pause";
+    video.play();
+  } else {
+    playBtnIcon.classList = "fas fa-play";
+    video.pause();
+  }
+
+  handleMouseMove();
+};
+
+const handleSpace = (event) => {
+  const SPACE_BAR = 32;
+
+  if (event.which === SPACE_BAR) {
+    handleClick();
+  }
+};
+
 const formatTime = (seconds) =>
   new Date(seconds * 1000).toISOString().substr(14, 5);
 
@@ -133,7 +153,9 @@ volumeRange.addEventListener("input", handleVolumeChange);
 video.addEventListener("loadeddata", handleLoadedMetadata);
 video.addEventListener("timeupdate", handleTimeUpdate);
 video.addEventListener("ended", handleEnded);
+video.addEventListener("click", handleClick);
 videoContainer.addEventListener("mousemove", handleMouseMove);
 videoContainer.addEventListener("mouseleave", handleMouseLeave);
 timeline.addEventListener("input", handleTimelineChange);
 fullScreen.addEventListener("click", handleFullScreen);
+document.addEventListener("keydown", handleSpace);
