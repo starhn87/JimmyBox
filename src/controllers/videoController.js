@@ -1,4 +1,5 @@
 import Video from "../models/Video";
+import Comment from "../models/Comment";
 import User from "../models/User";
 import mongoose from "mongoose";
 
@@ -16,7 +17,7 @@ export const home = async (req, res) => {
 
 export const watch = async (req, res) => {
   const { id } = req.params;
-  const video = await Video.findById(id).populate("owner");
+  const video = await Video.findById(id).populate("owner").populate("comments");
 
   if (!video) {
     return res.status(404).render("404", { pageTitle: "Video not found." });
@@ -100,7 +101,7 @@ export const postUpload = async (req, res) => {
 
     const user = await User.findById(mongoose.Types.ObjectId(_id));
     user.videos.push(newVideo._id);
-    user.save();
+    await user.save();
 
     req.flash("success", "Video uploaded!");
 
@@ -165,4 +166,29 @@ export const registerView = async (req, res) => {
   await video.save();
 
   return res.sendStatus(200);
+};
+
+export const createComment = async (req, res) => {
+  const {
+    params: { id },
+    body: { text },
+    session: { user },
+  } = req;
+
+  const video = await Video.findById(id);
+
+  if (!video) {
+    return res.sendStatus(404);
+  }
+
+  const comment = await Comment.create({
+    text,
+    owner: user._id,
+    video: id,
+  });
+
+  video.comments.push(comment._id);
+  await video.save();
+
+  return res.status(201).json({ newCommentId: comment._id });
 };
