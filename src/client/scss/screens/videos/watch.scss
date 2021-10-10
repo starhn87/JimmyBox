@@ -32,8 +32,9 @@
     background-color: white;
     color: black;
     margin-bottom: 10px;
-    span:last-of-type {
+    .commentDeleteBtn {
       float: right;
+      cursor: pointer;
     }
   }
 }

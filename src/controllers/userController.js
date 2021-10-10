@@ -53,18 +53,20 @@ export const postLogin = async (req, res) => {
   const pageTitle = "Login";
 
   if (!user) {
+    req.flash("error", "An account with this username does not exist.");
+
     return res.status(400).render("users/login", {
       pageTitle,
-      errorMessage: "An account with this username does not exist.",
     });
   }
 
   const ok = await bcrypt.compare(password, user.password);
 
   if (!ok) {
+    req.flash("error", "Wrong password");
+
     return res.status(400).render("users/login", {
       pageTitle,
-      errorMessage: "Wrong password",
     });
   }
 
