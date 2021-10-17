@@ -38,3 +38,4 @@ app.use("/users", userRouter);
 app.use("/api", apiRouter);
 
 export default app;
+// atlas db password: CIbGj2mbpwHJstuV
