@@ -4,7 +4,11 @@
   "description": "The best way to watch videos.",
   "scripts": {
     "dev:server": "nodemon",
-    "dev:assets": "webpack"
+    "dev:assets": "webpack --mode=development -w",
+    "build": "yarn build:server && yarn build:assets",
+    "build:server": "babel src -d build",
+    "build:assets": "webpack --mode=production",
+    "start": "node build/init.js"
   },
   "repository": "git+https://github.com/starhn87/wetube.git",
   "author": "Jimmy",
@@ -31,6 +35,7 @@
     "regenerator-runtime": "^0.13.9"
   },
   "devDependencies": {
+    "@babel/cli": "^7.15.7",
     "@babel/core": "^7.15.0",
     "@babel/node": "^7.14.9",
     "@babel/preset-env": "^7.15.0",

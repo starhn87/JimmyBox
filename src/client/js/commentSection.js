@@ -6,8 +6,6 @@ const form = document.getElementById("commentForm");
 const handleSubmit = async (event) => {
   event.preventDefault();
 
-  console.log("hi!");
-
   const textarea = form.querySelector("textarea");
   const text = textarea.value;
 
