@@ -16,8 +16,11 @@ header
           a(href="/users/logout") Logout
         li 
           a(href=`/users/${loggedInUser._id}`)
-            if loggedInUser.avatarUrl && loggedInUser.avatarUrl.startsWith("uploads")
-              img.header__avatar(src="/" + loggedInUser.avatarUrl)
+            if loggedInUser.avatarUrl
+              if loggedInUser.avatarUrl.startsWith("uploads")
+                img.header__avatar(src="/" + loggedInUser.avatarUrl)
+              else 
+                img.header__avatar(src=loggedInUser.avatarUrl)
             else 
               span 😀
       else
