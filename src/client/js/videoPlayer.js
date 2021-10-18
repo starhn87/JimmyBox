@@ -17,6 +17,25 @@ let controlsMovementTimeout = null;
 let volumeValue = 0.5;
 video.volume = volumeValue;
 
+window.addEventListener("load", () => {
+  init();
+});
+
+const init = () => {
+  playBtn.addEventListener("click", handlePlayClick);
+  muteBtn.addEventListener("click", handleMute);
+  volumeRange.addEventListener("input", handleVolumeChange);
+  video.addEventListener("loadeddata", handleLoadedMetadata);
+  video.addEventListener("timeupdate", handleTimeUpdate);
+  video.addEventListener("ended", handleEnded);
+  video.addEventListener("click", handleClick);
+  videoContainer.addEventListener("mousemove", handleMouseMove);
+  videoContainer.addEventListener("mouseleave", handleMouseLeave);
+  timeline.addEventListener("input", handleTimelineChange);
+  fullScreen.addEventListener("click", handleFullScreen);
+  document.addEventListener("keydown", handleSpace);
+};
+
 const handlePlayClick = (e) => {
   if (video.paused) {
     video.play();
@@ -147,16 +166,3 @@ const handleSpace = (event) => {
 
 const formatTime = (seconds) =>
   new Date(seconds * 1000).toISOString().substr(14, 5);
-
-playBtn.addEventListener("click", handlePlayClick);
-muteBtn.addEventListener("click", handleMute);
-volumeRange.addEventListener("input", handleVolumeChange);
-video.addEventListener("loadeddata", handleLoadedMetadata);
-video.addEventListener("timeupdate", handleTimeUpdate);
-video.addEventListener("ended", handleEnded);
-video.addEventListener("click", handleClick);
-videoContainer.addEventListener("mousemove", handleMouseMove);
-videoContainer.addEventListener("mouseleave", handleMouseLeave);
-timeline.addEventListener("input", handleTimelineChange);
-fullScreen.addEventListener("click", handleFullScreen);
-document.addEventListener("keydown", handleSpace);
