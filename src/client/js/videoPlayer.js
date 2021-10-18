@@ -22,6 +22,8 @@ window.addEventListener("load", () => {
 });
 
 const init = () => {
+  video.load();
+
   playBtn.addEventListener("click", handlePlayClick);
   muteBtn.addEventListener("click", handleMute);
   volumeRange.addEventListener("input", handleVolumeChange);
